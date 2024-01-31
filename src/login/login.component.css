@@ -17,3 +17,13 @@ a {
     margin-bottom: 1.5rem !important;
     height: 74px;
 }
+
+.align-items {
+    width: 500px;
+    margin: auto
+}
+@media screen and (max-width: 991px)  {
+    .align-items {
+        width:300px;
+    }
+}

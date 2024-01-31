@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private fb: FormBuilder, private toastr: ToastrService, private router:Router) { }
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private router: Router) { }
   loading = false;
   submitted = false;
   loginForm = this.fb.group({
@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     } else {
-      if(this.loginForm.value.username?.trim().length == 0 || this.loginForm.value.password?.trim().length == 0){
+      if (this.loginForm.value.username?.trim().length == 0 || this.loginForm.value.password?.trim().length == 0) {
         this.toastr.error('Username or Password Cannot be empty!');
-      }else if (this.loginForm.value.username === "admin" && this.loginForm.value.password === "admin") {
+      } else if (this.loginForm.value.username === "admin" && this.loginForm.value.password === "admin") {
         this.toastr.success('Login Success!');
-        sessionStorage.setItem("user","admin")
+        sessionStorage.setItem("user", "admin")
         this.router.navigate(['/customer-details']);
       } else {
         this.toastr.error('Incorrect Username or Password!');
@@ -38,4 +38,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  alphabetsOnly(event: any): void {
+    const inputChar = String.fromCharCode(event.charCode);
+    if (!/^[a-zA-Z]+$/.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 }

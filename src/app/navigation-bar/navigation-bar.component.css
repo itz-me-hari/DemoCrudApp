@@ -1,0 +1,19 @@
+.logout-btn {
+    display: flex;
+    gap: 10px;
+    position: fixed;
+    right: 10px;
+}
+
+
+.nav-link {
+    cursor: pointer;
+}
+
+.navbar {
+    padding: 10px;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    z-index: 999;
+}

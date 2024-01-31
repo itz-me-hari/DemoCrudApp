@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
-.body {
-    overflow: hidden;
-    height: auto !important;
+body {
+     height: auto !important;
+    background-color: #F8FAFF;
+}
+
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+.header{
+    margin-top: 80px;
 }

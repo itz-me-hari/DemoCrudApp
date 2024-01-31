@@ -1,5 +1,5 @@
-<div class="col-md-6 offset-md-3 mt-5">
-  <div class="alert alert-info">
+<div class="col-md-6 offset-md-3 mt-5" class="align-items">
+  <div class="alert alert-info mt-3">
     Username: admin<br />
     Password: admin<br />
   </div>
@@ -10,7 +10,7 @@
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" formControlName="username" class="form-control" maxlength="30"
-            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            (keypress)="alphabetsOnly($event)" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
             <div *ngIf="f.username.errors['required']">Username is required</div>
           </div>
@@ -23,7 +23,7 @@
             <div *ngIf="f.password.errors['required']">Password is required</div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="text-align: center;">
           <button [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Login
