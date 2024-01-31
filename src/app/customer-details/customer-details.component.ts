@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomerDetailsService } from './customer-details.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-customer-details',
   templateUrl: './customer-details.component.html',
@@ -13,14 +14,22 @@ export class CustomerDetailsComponent implements OnInit {
   paginator!: MatPaginator;
   public dataSource = new MatTableDataSource;
   displayedColumns: string[] = ['position', 'name', 'age', 'mobile', 'email', 'location', 'edit', 'delete'];
-  constructor(private service: CustomerDetailsService, private router: Router) { }
+  constructor(private service: CustomerDetailsService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.getCustomerDetails()
+  }
+
+  getCustomerDetails() {
     this.service.getCustomerDetails().subscribe(response => {
-      this.dataSource = new MatTableDataSource (response);
+      this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator;
-      console.log(response)
-    })
+      console.log("response: ", response)
+    },
+      (err) => {
+        this.toastr.error('Crud Endpoint Expired! Please update new Crud Endpoint!')
+      },
+    )
   }
 
   editRecord(obj: any) {
@@ -29,7 +38,8 @@ export class CustomerDetailsComponent implements OnInit {
 
   deleteRecord(obj: any) {
     this.service.deleteCustomer(obj['_id']).subscribe(response => {
-      console.log(response)
+      this.toastr.success("Customer deleted successfully!")
+      this.getCustomerDetails()
     })
   }
 }
